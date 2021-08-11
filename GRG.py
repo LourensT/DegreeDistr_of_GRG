@@ -4,11 +4,11 @@ import numpy as np
 import itertools
 import matplotlib.pyplot as plt
 
+import tikzplotlib as plt2tikz
 
 class GRG:
 
     '''
-    
 
     @param n: number of vertices
     @param weigh_weights: array or list of the weights of all vertices, length determines sizes of GRG
@@ -40,7 +40,40 @@ class GRG:
         w2 = self.vertex_weights[v2]
         return (w1*w2 / ((w1*w2) + self.weights_sum))
 
+    
+    '''
+    saves the degree distribution of the currently generated graph
+
+    parameters: 
+    fp: filepath to save file to
+    show: whether to display the plot on screen
+    '''
+    def saveDegreeDistribution(self, fp, show=False):
+        print("Saving: " + fp)
+        assert ".tikz" in fp, "filepath does not end in .tikz"
+
+        degrees = [self.G.degree(n) for n in self.G.nodes()]
+        degrees.sort()
+        total = sum(degrees)
+        cumulative = [sum(degrees[n::])/total for n in range(len(degrees))]
+        prev = degrees[0]
+        index = [prev]
+        freq = [cumulative[0]]
+        for i in range(1, len(degrees)):
+            if not (degrees[i] == prev):
+                prev = degrees[i]
+                index.append(degrees[i])
+                freq.append(cumulative[i])
+                
+        plt.loglog(index, freq)
+
+        plt2tikz.save(fp) #output
+
+        if show:
+            plt.show()
         
+        plt.clf() #clear plot
+
     def _sampleUniformForSimulation(self, len):
         return list(stats.uniform.rvs(size=int(len)))
 
@@ -48,3 +81,4 @@ if __name__ == '__main__':
     vertex_distr = stats.norm.rvs(size=100)
     graph = GRG(vertex_distr)
     graph.draw()
+    graph.saveDegreeDistribution('plot.tikz', show=True)
