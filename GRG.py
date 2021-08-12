@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 
 import tikzplotlib as plt2tikz
 
+from DegreeDistributions.DegreeDistributions import *
+
 class GRG:
 
     '''
@@ -43,8 +45,17 @@ class GRG:
     def _sampleUniformForSimulation(self, len):
         return list(stats.uniform.rvs(size=int(len)))
 
+    def DegreeDistribrution(self):
+        return DegreeDistribution(self.G, tail=True)
+
+    def RandomFriendDegreeDistribution(self):
+        return RandomFriendDegreeDistribution(self.G, tail=True)
+
+    def SizeBiasedDegreeDistribution(self):
+        return SizeBiasedDegreeDistribution(self.G)
+
 if __name__ == '__main__':
     vertex_distr = stats.norm.rvs(size=100)
     graph = GRG(vertex_distr)
     graph.draw()
-    graph.saveDegreeDistribution('plot.tikz', show=True)
+    #graph.saveDegreeDistribution('plot.tikz', show=True)
