@@ -52,7 +52,7 @@ class GRG:
         return RandomFriendDegreeDistribution(self.G, tail=True)
 
     def SizeBiasedDegreeDistribution(self):
-        return SizeBiasedDegreeDistribution(self.G)
+        return SizeBiasedDegreeDistribution(self.G, tail=True)
 
 if __name__ == '__main__':
     vertex_distr = stats.norm.rvs(size=100)
