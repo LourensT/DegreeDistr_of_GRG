@@ -65,6 +65,32 @@ class GRG:
         component_sizes = [len(c) for c in sorted(nx.connected_components(self.G), key=len, reverse=True)]
         return component_sizes[0]
 
+    '''
+    Returns distribution of typical distance:
+
+    the length of the shortest path between two randomly drawn nodes, given that they are connected
+    '''
+    def typicalDistanceDistribution(self):
+        #dictionary of dictionaries
+        all_shortest_paths = nx.algorithms.shortest_path(self.G)
+
+        pmf = {}
+        numberOfPaths = 0
+        for source, destinations in all_shortest_paths.items():
+            for destination, path in destinations.items():
+                if len(path) in pmf:
+                    pmf[len(path)] += 1
+                else: 
+                    pmf[len(path)] = 1
+                numberOfPaths += 1
+        
+        #normalize the histogram (paths currently double counted)
+        for key in pmf.keys():
+            pmf[key] = pmf[key] / numberOfPaths
+
+        assert abs(sum([v for v in pmf.values()]) - 1) < 0.00001, "pmf does not sum to one!!"
+
+        return pmf
 
 if __name__ == '__main__':
     vertex_distr = stats.norm.rvs(size=100)

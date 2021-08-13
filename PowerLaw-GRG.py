@@ -56,3 +56,9 @@ plt.title("Tail Distributions of degrees, tau=3.5, alpha=1")
 plt.show()
 
 print("Size of Giant Component", graph.getSizeOfGiantComponent())
+
+typicalDist = graph.typicalDistanceDistribution()
+# plot distance distribution
+plt.scatter(x=typicalDist.keys(), y=typicalDist.values(), color='red')
+plt.title("Typical distance distribution, tau=3.5, alpha=1")
+plt.show()
