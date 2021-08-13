@@ -54,3 +54,5 @@ plt.scatter(x=distrBiased.keys(), y=distrBiased.values(), color='green')
 plt.legend(["Normal Degree Distribution", "size Biased Degree Distribution"])
 plt.title("Tail Distributions of degrees, tau=3.5, alpha=1")
 plt.show()
+
+print("Size of Giant Component", graph.getSizeOfGiantComponent())

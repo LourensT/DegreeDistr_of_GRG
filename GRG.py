@@ -54,6 +54,18 @@ class GRG:
     def SizeBiasedDegreeDistribution(self):
         return SizeBiasedDegreeDistribution(self.G, tail=True)
 
+    '''
+    Returns size of largest connected component (giant components)
+
+    Note: Strictly speaking, we assume the GRG is highly connected, that is, as n -> \inf, 
+    liminf of the ( size of the largest connected component / size of network) > 0.
+    '''
+    def getSizeOfGiantComponent(self):
+        # get sorted list of size of all connected components
+        component_sizes = [len(c) for c in sorted(nx.connected_components(self.G), key=len, reverse=True)]
+        return component_sizes[0]
+
+
 if __name__ == '__main__':
     vertex_distr = stats.norm.rvs(size=100)
     graph = GRG(vertex_distr)
