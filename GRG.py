@@ -45,14 +45,14 @@ class GRG:
     def _sampleUniformForSimulation(self, len):
         return list(stats.uniform.rvs(size=int(len)))
 
-    def DegreeDistribrution(self):
-        return DegreeDistribution(self.G, tail=True)
+    def DegreeDistribrution(self, tail=True):
+        return DegreeDistribution(self.G, tail=tail)
 
-    def RandomFriendDegreeDistribution(self):
-        return RandomFriendDegreeDistribution(self.G, tail=True)
+    def RandomFriendDegreeDistribution(self, tail=True):
+        return RandomFriendDegreeDistribution(self.G, tail=tail)
 
-    def SizeBiasedDegreeDistribution(self):
-        return SizeBiasedDegreeDistribution(self.G, tail=True)
+    def SizeBiasedDegreeDistribution(self, tail=True):
+        return SizeBiasedDegreeDistribution(self.G, tail=tail)
 
     '''
     Returns size of largest connected component (giant components)

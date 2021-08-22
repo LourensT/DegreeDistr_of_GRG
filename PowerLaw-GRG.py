@@ -46,12 +46,17 @@ plt.title("Tail Distribution of vertex weights, tau=3.5, alpha=1")
 plt.show()
 
 
-distr = graph.DegreeDistribrution()
-distrBiased = graph.SizeBiasedDegreeDistribution()
+distr = graph.DegreeDistribrution(tail=True)
+distrBiased = graph.SizeBiasedDegreeDistribution(tail=True)
+friendBiased = graph.RandomFriendDegreeDistribution(tail=True)
 # plot degree distribution
 plt.scatter(x=distr.keys(), y=distr.values(), color='red')
+print(max(distr.keys()))
 plt.scatter(x=distrBiased.keys(), y=distrBiased.values(), color='green')
-plt.legend(["Normal Degree Distribution", "size Biased Degree Distribution"])
+print(max(distrBiased.keys()))
+plt.scatter(x=friendBiased.keys(), y=friendBiased.values(), color='blue')
+print(max(friendBiased.keys()))
+plt.legend(["Normal Degree Distribution", "size Biased Degree Distribution", "Friend"])
 plt.title("Tail Distributions of degrees, tau=3.5, alpha=1")
 plt.show()
 
