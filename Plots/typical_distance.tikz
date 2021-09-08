@@ -1,0 +1,53 @@
+%Distribution of typical distance of GRG (n=1000) with Powerlaw (tau==3.5) distributed weights, following #6.2.21 from Hofstad RGCN Vol1.
+\tikzstyle{every node}=[font=\normalsize]
+
+\begin{tikzpicture}
+    \begin{axis}[%
+width=0.951\fwidth,
+height=\fheight,
+at={(0\fwidth,0\fheight)},
+scale only axis,
+xminorticks=true,
+yminorticks=true,
+axis x line*=bottom,
+axis y line*=left,
+x tick label style = {/pgf/number format/.cd, scaled x ticks = false, set thousands separator={}, fixed},
+axis background/.style={fill=white},
+legend style={legend pos=north west, legend cell align=left, align=left, draw=white!15!black}, 
+xmin=0, 
+xmax=25, 
+ymin=0, 
+ymax=0.15777656029674603, 
+xlabel={Typical Distance}]
+
+\addplot [color=mycolor2, line width = 2pt, mark size=1.5pt, mark=*, only marks, mark options={solid, mycolor2}]
+table[row sep=crcr]{
+1	0.002245354361825383\\ 
+2	0.0037048346970118824\\ 
+3	0.008078784993847728\\ 
+4	0.01617553282259006\\ 
+5	0.03139454468704251\\ 
+6	0.05590932360945204\\ 
+7	0.09335285294725214\\ 
+8	0.13407010894459365\\ 
+9	0.15777656029674603\\ 
+10	0.15222155360559003\\ 
+11	0.12022525394957832\\ 
+12	0.08121446726722412\\ 
+13	0.04907895564077923\\ 
+14	0.02976890812908093\\ 
+15	0.01938638956000036\\ 
+16	0.013611338141385473\\ 
+17	0.010422934947593429\\ 
+18	0.008276376177688363\\ 
+19	0.005999586854797424\\ 
+20	0.0037766860365902946\\ 
+21	0.002083688847773956\\ 
+22	0.0008622160749409472\\ 
+23	0.0002963867757609506\\ 
+24	5.837921340745997e-05\\ 
+25	8.981417447301533e-06\\ 
+};
+
+	\end{axis}
+\end{tikzpicture}
