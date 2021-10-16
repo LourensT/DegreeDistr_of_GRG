@@ -1,11 +1,11 @@
-# GRG with Powerlaw weights example
+# GRG with power law distributed weights example
 
-inspect the degree distribution of a Generalized Random Graph. Implementation of GRG with Powerlaw distributed weights.
+RGCN = Random Graphs and Complex Networks by Remco van der Hofstad, respectively volume 1 and 2. 
 
-We expect that the tail degree distribution also obeys a powerlaw.
+Here we consider the GRG model (Generalized Random Graph), as defined in chapter 6 of RGCN II. The weights are powerlaw distributed as described in equation 6.2.1, for both $\tau = 2.5$ and $\tau = 3.5$.
 
-Additionally, calculate the size of the giant component with getSizeOfGiantComponent()
-* Note: Strictly speaking, we assume the GRG is highly connected, that is, as n -> \inf, 
-    liminf of the ( size of the largest connected component / size of network) > 0.)
+The objective is to inspect three different definitions for a degree distribution. The conventional definition, the size-biased definition (1.2.2 in RGCN I), and the random friend distribution (the degree distribution of a uniformly selected adjacent vertex to a uniformly selected vertex in the network). See the submodule DegreeDistributions for more details. 
 
-Also, calculate the typical distance (distribution of the shortest paths). 
+Both networks generated in the preview.pdf are of size $N = 10000.$ For the case with $\tau = 2.5$, the giant component is of size $7797$, for the case with $\tau = 3.5$, the giant component is $6476$. 
+
+The `GRG` class defined in `GRG.py` support generic weights, the `Powerlaw-GRG.py` gives an example where the weights are powerlaw distributed.

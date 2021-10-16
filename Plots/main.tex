@@ -68,16 +68,50 @@
 	\definecolor{mycolor4}{rgb}{0.00000,0.10000,0.10000}
 	\definecolor{mycolor5}{rgb}{0.00000,1,1}
 	
+	Here we consider the GRG model (Generalized Random Graph), as defined in chapter 6 of RGCN II. The weights are powerlaw distributed as described in equation 6.2.1, for both $\tau = 2.5$ and $\tau = 3.5$.
+
+	This showcases three different definitions for a degree distribution. The conventional definition, the size-biased definition (1.2.2 in RGCN I), and the random friend distribution (the degree distribution of a uniformly selected adjacent vertex to a uniformly selected vertex in the network.)
+	
+	Both networks generated here are of size $N = 10000.$ For the case with $\tau = 2.5$, the giant component is of size $7797$, for the case with $\tau = 3.5$, the giant component is $6476$.
+	
+	All code used for generation is found in \url{https://github.com/LourensT/DegreeDistr_of_GRG}.
+	
+	
 	\begin{figure}[!htb]
 		\centering
-		\input{degree_distribution.tikz}
-		\caption{Degree distribution}
+		\input{degree_distribution_2.5.tikz}
+		\caption{Degree distribution 2,5}
+	\end{figure}
+
+	\begin{figure}[!htb]
+		\centering
+		\input{degree_distribution_loglog_2.5.tikz}
+		\caption{Degree distribution loglog 2,5}
+	\end{figure}
+
+	\begin{figure}[!htb]
+		\centering
+		\input{degree_distribution_3.5.tikz}
+		\caption{Degree distribution 3,5}
 	\end{figure}
 	
 	\begin{figure}[!htb]
 		\centering
-		\input{typical_distance.tikz}
-		\caption{typical distance distribution}
+		\input{degree_distribution_loglog_3.5.tikz}
+		\caption{Degree distribution loglog 3,5}
+	\end{figure}
+	
+	
+	\begin{figure}[!htb]
+		\centering
+		\input{typical_distance_2.5.tikz}
+		\caption{typical distance distribution 2.5}
+	\end{figure}
+
+	\begin{figure}[!htb]
+		\centering
+		\input{typical_distance_3.5.tikz}
+		\caption{typical distance distribution 3.5}
 	\end{figure}
 
 \end{document}

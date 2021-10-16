@@ -1,0 +1,32 @@
+\begin{tikzpicture}
+\begin{axis}[%
+ybar interval,
+axis x line*=bottom,
+axis y line*=left,
+axis background/.style={fill=white},
+xmin=1, 
+xmax=13,
+ymax=0.35,
+ymin=0,
+grid=none,
+ylabel={Proportion},
+xlabel={Typical Distance}]
+\addplot[fill=mycolor1] coordinates { 
+	(1 , 0.00016448508995294805)
+	(2 , 0.00046381505664932295)
+	(3 , 0.009484769535992825)
+	(4 , 0.09022721049209596)
+	(5 , 0.2874754933664479)
+	(6 , 0.33323564015557394)
+	(7 , 0.18592920851222183)
+	(8 , 0.06629466280096001)
+	(9 , 0.01951033315073295)
+	(10 , 0.005486992321704413)
+	(11 , 0.0013962481345745948)
+	(12 , 0.0002752493495272633)
+	(13 , 4.727301485247727e-05)
+	(14 , 7.5663141378356105e-06)
+	(15 , 1.0527045756988675e-06)
+ };
+\end{axis}
+\end{tikzpicture}
