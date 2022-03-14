@@ -9,8 +9,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-n = 10000
-tau = 2.5
+n = 100000
+tau = 3.5
 a = 1
 
 show_plots = False
@@ -28,7 +28,7 @@ def sampleWeight(size):
 
     return weights
 
-BASE_FP = os.getcwd() + "\\Plots\\"
+BASE_FP = os.getcwd() + "\\Plots2\\"
 print(BASE_FP)
 
 weights = sampleWeight(n)
@@ -102,10 +102,11 @@ if show_plots:
 
 print("Size of Giant Component", graph.getSizeOfGiantComponent())
 
-typicalDist = graph.typicalDistanceDistribution()
+typicalDist = graph.typicalDistanceDistribution(2000)
 
 with open(BASE_FP+f"\\typical_dist_{tau}.json", 'w') as f:
-    for key, value in typicalDist.items():
+    import collections 
+    for key, value in collections.OrderedDict(sorted(typicalDist.items())).items():
         f.write(f"({key} , {value})\n")
 
 

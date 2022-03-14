@@ -3,6 +3,11 @@ from scipy import stats
 import numpy as np
 import itertools
 import matplotlib.pyplot as plt
+import random
+
+from datetime import datetime
+
+from Distribution import *
 
 import tikzplotlib as plt2tikz
 
@@ -28,9 +33,16 @@ class GRG:
             self.vertex_weights[i] = weight
 
         # vertices
-        benches = self._sampleUniformForSimulation((self.n*(self.n-1)/2))
+        # benches = self._sampleUniformForSimulation((self.n*(self.n-1)/2))
+        benches = Distribution(stats.uniform())
+        c = 0
+        step = 10000000
+        total = (self.n*(self.n-1)/2)
         for (v1, v2) in itertools.combinations(self.vertex_weights.keys(), r=2):
-            if self.weightProbability(v1, v2) >= benches.pop():
+            c += 1
+            if c%step==0:
+                print(f"at {c/step} out of {total/step}, time {datetime.strftime(datetime.now(), '%H:%M:%S')}")
+            if self.weightProbability(v1, v2) >= benches.rvs():
                 self.G.add_edge(v1, v2)
 
     def draw(self):
@@ -67,23 +79,44 @@ class GRG:
 
     '''
     Returns distribution of typical distance:
+    - the length of the shortest path between two randomly drawn nodes, given that they are connected
 
-    the length of the shortest path between two randomly drawn nodes, given that they are connected
+    @param sample: The number of randomly drawn 
+
     '''
-    def typicalDistanceDistribution(self):
-        #dictionary of dictionaries
-        all_shortest_paths = nx.algorithms.shortest_path(self.G)
+    def typicalDistanceDistribution(self, sample=-1):
 
+        all_shortest_paths = []
+        if sample == -1:
+            #dictionary of dictionaries dict[source][target] = path
+            for source, destinations in nx.algorithms.shortest_path(self.G).items():
+                for destination, path in destinations.items():
+                    all_shortest_paths.append(path)
+        else:
+            for i in range(sample):
+                found_path = False
+                while not found_path:
+                    source = random.choice(list(self.G.nodes))
+                    target = random.choice(list(self.G.nodes))
+
+                    try:
+                        all_shortest_paths.append(nx.algorithms.shortest_path(self.G, source, target))
+                        found_path = True
+                    except nx.exception.NetworkXNoPath:
+                        found_path = False
+
+        # calculate pmf
         pmf = {}
-        numberOfPaths = 0
-        for source, destinations in all_shortest_paths.items():
-            for destination, path in destinations.items():
-                if len(path) in pmf:
-                    pmf[len(path)] += 1
-                else: 
-                    pmf[len(path)] = 1
-                numberOfPaths += 1
-        
+        numberOfPaths = 0 #if sample > 0, then this will end up being equal to sample
+        for path in all_shortest_paths:
+            if (len(path)-1) in pmf:
+                pmf[len(path)-1] += 1
+            else: 
+                pmf[len(path)-1] = 1
+            numberOfPaths += 1
+
+        print(numberOfPaths)
+
         #normalize the histogram (paths currently double counted)
         for key in pmf.keys():
             pmf[key] = pmf[key] / numberOfPaths
